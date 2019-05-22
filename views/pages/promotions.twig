@@ -1,0 +1,13 @@
+{% extends "pages/base.twig" %}
+
+{% block content %}
+
+    {% for _promotion in promotions %}
+
+        <a href="{{path_for('promotion', { year: _promotion.year}) }}">
+            P{{_promotion.year}}
+        </a>
+
+    {% endfor %}
+
+{% endblock %}

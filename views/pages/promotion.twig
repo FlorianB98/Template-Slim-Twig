@@ -1,0 +1,13 @@
+{% extends "pages/base.twig" %}
+
+{% block content %}
+
+    {% for _student in promotion %}
+        <div>
+            <a href="{{ path_for('student', { slug: _student.slug }) }}">
+                <div>{{ _student.first_name }} {{ _student.last_name }}</div>
+            </a>
+        </div>
+    {% endfor %}
+    
+{% endblock %}
