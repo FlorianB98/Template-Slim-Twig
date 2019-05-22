@@ -64,7 +64,7 @@ Your file "route" call a file in the folder "pages" where you define your compon
 * Bruno Simon
 
 ### With the help
-* Jules Gesnon
+* Jules Guesnon
 
 
 Donc forget to tag and to follow the github :ok_hand:
