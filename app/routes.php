@@ -15,77 +15,22 @@ $app
     ->setName('home')
 ;
 
-// Promotions
+// Categories
 $app
     ->get(
-        '/promotions',
+        '/categories',
         function($request, $response)
         {
-            // Fetch promotions
-            $query = $this->db->query('SELECT * FROM promotions');
-            $promotions = $query->fetchAll();
+            // Fetch categories
+            $query = $this->db->query('SELECT * FROM categories');
+            $categories = $query->fetchAll();
 
             // View data
             $viewData = [];
-            $viewData['promotions'] = $promotions;
+            $viewData['categories'] = $categories;
 
-            return $this->view->render($response, 'pages/promotions.twig', $viewData);
+            return $this->view->render($response, 'pages/categories.twig', $viewData);
         }
     )
-    ->setName('promotions')
+    ->setName('categories')
 ;
-
-// Promotion
-$app
-    ->get(
-        '/promotions/{year:[0-9]{4}}',
-        function($request, $response, $arguments)
-        {
-            // View data
-            $query = $this->db->query('SELECT id FROM promotions WHERE year='.$arguments['year']);
-            $year = $query->fetch();
-            $query = $this->db->query('SELECT * FROM students WHERE id_promotion='.$year->id.'');
-            $promotion = $query->fetchAll();
-            echo '<pre>';
-            print_r($promotion);
-            echo '</pre>';
-
-            $viewData = [];
-            $viewData['promotion'] = $promotion;
-            
-            return $this->view->render($response, 'pages/promotion.twig', $viewData);
-        }
-    )
-    ->setName('promotion')
-;
-
-// Random student
-$app
-    ->get(
-        '/students/random',
-        function($request, $response)
-        {
-            return 'random student';
-        }
-    )
-    ->setName('random_student')
-;
-
-// Student
-$app
-    ->get(
-        '/students/{slug:[a-z_-]+}',
-        function($request, $response, $arguments)
-        {
-            $query = $this->db->query('SELECT * FROM students WHERE slug="'.$arguments['slug'].'"');
-            $student = $query->fetchAll();
-            // View data
-            $viewData = [];
-            $viewData['student'] = $student;
-
-            return $this->view->render($response, 'pages/student.twig', $viewData);
-        }
-    )
-    ->setName('student')
-;
-

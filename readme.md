@@ -1,6 +1,8 @@
 # Proj_Slim
 
+
 ## WIP
+
 
 ## What is this ?
 This is a Slim/Twig template to use in light project with a mecanic of blocks.
@@ -10,7 +12,7 @@ This is a Slim/Twig template to use in light project with a mecanic of blocks.
 * gestion of page with blocks and expend
 * Use of a database
 
-## Usage in local
+## Install in local
 
 You will first need to import your composers :
 ```
@@ -30,6 +32,34 @@ $settings['db']['user'] = 'root';
 $settings['db']['pass'] = '';
 $settings['db']['name'] = 'slim_try';
 ```
+
+
+
+## How to do new page
+
+Go in the file "route" and define the page and the url (all your php logic will be in this file):
+
+```php
+$app
+    ->get(
+        '/', //your url here
+        function($request, $response)
+        {
+            // View data (data you want in your page)
+            $viewData = [];
+
+            return $this->view->render($response, 'pages/home.twig', $viewData); //the file page you will use for the front
+        }
+    )
+    ->setName('home')
+;
+```
+
+## How do the base/expend/use works
+
+Your file "route" call a file in the folder "pages" where you define your componnent like "content". They will next push those block in "base". You can call exterior blocks with "use".
+
+
 
 ## Contributing
 * Brunet Florian
