@@ -1,8 +1,6 @@
 # Proj_Slim
 
 
-## WIP
-
 
 ## What is this ?
 This is a Slim/Twig template to use in light project with a mecanic of blocks.
@@ -67,3 +65,6 @@ Your file "route" call a file in the folder "pages" where you define your compon
 
 ### With the help
 * Jules Gesnon
+
+
+Donc forget to tag and to follow the github :ok_hand:
