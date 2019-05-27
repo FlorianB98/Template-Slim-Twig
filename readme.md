@@ -62,6 +62,19 @@ $app
 
 You still have to do the front (glhf, i hate that part). Use files in views/pages/child and dont forget to call your blocks in the base.
 
+###
+You can comment this in app/services to see Slim error :
+```php
+// 500
+$container['errorHandler'] = function($container)
+{
+    return function($request, $response) use($container)
+    {
+        $viewData=['code'=>500];
+        return $container['view']->render($response->withStatus(500), 'pages/base/error.twig',$viewData);
+    };
+};
+```
 
 ## Contributing
 * Brunet Florian
@@ -71,4 +84,4 @@ You still have to do the front (glhf, i hate that part). Use files in views/page
 * Jules Guesnon
 
 
-Donc forget to tag and to follow the github :ok_hand:
+Dont forget to tag and to follow the github :ok_hand:
