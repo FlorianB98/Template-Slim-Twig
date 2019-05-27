@@ -1,0 +1,21 @@
+{% extends "pages/base/home_base.twig" %}
+
+{% use "pages/to_use/side_bar.twig" %}
+
+{% block title %}
+    <h1>Home</h1>
+{% endblock title %}
+    {# rajouter ici l'affichage des données projets avec liens pour les pages#}
+
+{% block content %}
+    {% for _data_project in data_projects %}
+
+        <p>{{_data_project.title}}</p>
+        <p>{{_data_project.introduction}}</p>
+        <img src ="../assets/img/{{_data_project.category}}/{{_data_project.name1}}_vig.png">
+        
+        <li><a href="{{ path_for('project', { cate:  _data_project.category , proj:  _data_project.name1  }) }}">voir tout</a></li>
+        
+    {% endfor %}
+{% endblock content %}
+

@@ -3,12 +3,15 @@
 
 
 ## What is this ?
-This is a Slim/Twig template to use in light project with a mecanic of blocks.
+
+This is a Slim/Twig template to use for Portfolio with a mecanic of blocks.
+
 
 ## Features
 
-* gestion of page with blocks and expend
-* Use of a database
+* Gestion of page with blocks and expend
+* Use of a database for the project
+
 
 ## Install in local
 
@@ -17,10 +20,15 @@ You will first need to import your composers :
 composer install
 ```
 
+If it doesnt work :
+https://getcomposer.org/Composer-Setup.exe
+and retry.
+
 Then
 ```php
 //Install DB
-Import in PhpMyAdmin the database slim_try.sql
+In PhpMyAdmin create the db portfolio_slim
+Import the database project.sql
 
 // Connect your database in app/settings.php 
 $settings['db'] = [];
@@ -28,35 +36,31 @@ $settings['db']['host'] = 'localhost';
 $settings['db']['port'] = '';
 $settings['db']['user'] = 'root';
 $settings['db']['pass'] = '';
-$settings['db']['name'] = 'slim_try';
+$settings['db']['name'] = 'portfolio_slim';
 ```
 
 
+## How to introduce your project
 
-## How to do new page
-
-Go in the file "route" and define the page and the url (all your php logic will be in this file):
-
+Add a line in your database with a name1 (no caps), a title, a introduction (for the home page), a description (for the individual project page) and a category ('design' or 'dev'). You can add a linke but it's not mandatory. Next you will need 2 photos : 1 for the home (name of the photo : name1_vig.png) and 1 for the project page (name1_png).
+You can add a category : 
 ```php
+// ./app/routes.php
 $app
     ->get(
-        '/', //your url here
-        function($request, $response)
-        {
-            // View data (data you want in your page)
-            $viewData = [];
-
-            return $this->view->render($response, 'pages/home.twig', $viewData); //the file page you will use for the front
-        }
-    )
-    ->setName('home')
-;
+        // add your category after design
+        '/project/{cate:dev|design}/{proj:[a-z]+}',
+        function($request, $response, $arguments)
+        {        
+            $viewData=[];
+            $viewData['seo'] = new \StdClass();
+            $viewData['seo']->title = 'Portfolio';
 ```
 
-## How do the base/expend/use works
 
-Your file "route" call a file in the folder "pages" where you define your componnent like "content". They will next push those block in "base". You can call exterior blocks with "use".
+## What else?
 
+You still have to do the front (glhf, i hate that part). Use files in views/pages/child and dont forget to call your blocks in the base.
 
 
 ## Contributing

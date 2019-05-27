@@ -1,36 +1,64 @@
 <?php
 
-// Home
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
+
+//Create routes
+$app -> get
+(
+    '/',
+    function(Request $request, Response $response)
+    {
+        $viewData=[];
+        $viewData['seo'] = new \StdClass();
+        $viewData['seo']->title = 'Portfolio';
+        $viewData['seo']->description = 'I am a second year student at HETIC Paris, learning design and web development. Welcome to my Portfolio !';
+
+        $query = $this->db->query('SELECT * FROM projects');
+        $data_projects = $query->fetchAll();
+        $viewData['data_projects'] = $data_projects;
+
+        return $this->view->render($response, 'pages/child/home.twig', $viewData);
+    }
+)
+->setName('home');
+
 $app
     ->get(
-        '/',
+        '/about',
         function($request, $response)
-        {
-            // View data
+        {        
             $viewData = [];
+            $viewData['seo'] = new \StdClass();
+            $viewData['seo']->title = 'Portfolio';
+            $viewData['seo']->description = 'I am a second year student at HETIC Paris, learning design and web development. Welcome to my Portfolio !';
 
-            return $this->view->render($response, 'pages/home.twig', $viewData);
+            return $this->view->render($response, 'pages/child/about.twig', $viewData);
         }
     )
-    ->setName('home')
+    ->setName('about')
 ;
 
-// Categories
 $app
     ->get(
-        '/categories',
-        function($request, $response)
-        {
-            // Fetch categories
-            $query = $this->db->query('SELECT * FROM categories');
-            $categories = $query->fetchAll();
-
-            // View data
+        '/project/{cate:dev|design}/{proj:[a-z]+}',
+        function($request, $response, $arguments)
+        {        
             $viewData = [];
-            $viewData['categories'] = $categories;
+            
+            $query = $this->db->prepare('SELECT * FROM projects WHERE name1 = :arg LIMIT 1');
+            $query->bindParam('arg', $arguments['proj']);
+            $query->execute();
+            $data_project = $query->fetch();
+            $viewData['data_project'] = $data_project;
 
-            return $this->view->render($response, 'pages/categories.twig', $viewData);
+            $viewData['seo'] = new \StdClass();
+            $viewData['seo']->title =$viewData['data_project']->title;
+            $viewData['seo']->description = 'I am a second year student at HETIC Paris, learning design and web development. Welcome to my Portfolio !';
+
+
+            return $this->view->render($response, 'pages/child/project.twig', $viewData);
         }
     )
-    ->setName('categories')
+    ->setName('project')
 ;

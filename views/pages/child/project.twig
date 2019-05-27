@@ -1,0 +1,16 @@
+{% extends "pages/base/project_base.twig" %}
+
+{% use "pages/to_use/side_bar.twig" %}
+
+
+{% block title %}
+{# mettre le titre depuis la base de donnée #}
+    <h1>{{ data_project.title }}</h1>
+    <p>{{ data_project.description }}</p>
+    <img src ="../../../assets/img/{{data_project.category}}/{{data_project.name1}}.png">
+
+    {% if data_project.lien != null %}
+        <li><a href="{{ data_project.lien }}">voir le site</a></li>
+    {% endif %}
+
+{% endblock title %}

@@ -3,7 +3,9 @@
 
     {% block sidebar %}{% endblock %}
 
-    <div id="content">{% block content %}{% endblock %}</div>
+    {% block title %}{% endblock %}
+
+    {% block content %}{% endblock %}
     
 
 {% include 'partials/footer.twig' %}
