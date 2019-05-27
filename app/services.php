@@ -31,12 +31,12 @@ $container['notFoundHandler'] = function($container)
     };
 };
 
-// 500
-$container['errorHandler'] = function($container)
-{
-    return function($request, $response) use($container)
-    {
-        $viewData=['code'=>500];
-        return $container['view']->render($response->withStatus(500), 'pages/base/error.twig',$viewData);
-    };
-};
+// // 500
+// $container['errorHandler'] = function($container)
+// {
+//     return function($request, $response) use($container)
+//     {
+//         $viewData=['code'=>500];
+//         return $container['view']->render($response->withStatus(500), 'pages/base/error.twig',$viewData);
+//     };
+// };

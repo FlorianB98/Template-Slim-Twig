@@ -14,7 +14,7 @@ $app -> get
         $viewData['seo']->title = 'Portfolio';
         $viewData['seo']->description = 'I am a second year student at HETIC Paris, learning design and web development. Welcome to my Portfolio !';
 
-        $query = $this->db->query('SELECT * FROM projects');
+        $query = $this->db->query('SELECT * FROM project');
         $data_projects = $query->fetchAll();
         $viewData['data_projects'] = $data_projects;
 
@@ -46,7 +46,7 @@ $app
         {        
             $viewData = [];
             
-            $query = $this->db->prepare('SELECT * FROM projects WHERE name1 = :arg LIMIT 1');
+            $query = $this->db->prepare('SELECT * FROM project WHERE name1 = :arg LIMIT 1');
             $query->bindParam('arg', $arguments['proj']);
             $query->execute();
             $data_project = $query->fetch();
